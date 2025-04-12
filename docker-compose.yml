@@ -1,0 +1,18 @@
+services:
+  cpp-container:
+    build: .
+    volumes:
+      - .:/app
+    command: >
+      sh -c "./venv/bin/activate && 
+      conan install /app --build=missing && 
+      cd /app/build/Release/generators/ &&
+      cmake /app -DCMAKE_TOOLCHAIN_FILE='/app/build/Release/generators/conan_toolchain.cmake' -DCMAKE_BUILD_TYPE='Release' &&
+      cmake --build . --config Release &&
+      /app/build/Release/generators/adaptiveSubtraction.Test &&
+      mv /app/build/Release/generators/AdaptiveSubtractionMain /app/release/AdaptiveSubtractionMain && 
+      cd /app/release/ &&
+      /app/release/AdaptiveSubtractionMain"
+      
+      
+      
