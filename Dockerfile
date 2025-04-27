@@ -1,7 +1,17 @@
-FROM ubuntu:22.04 AS base
+#FROM rocm/dev-ubuntu-22.04 AS base
+FROM rocm/dev-ubuntu-24.04 AS base
 
-RUN apt-get update
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update --fix-missing
 RUN apt-get upgrade -y
+
+RUN apt-get install -y apt-transport-https 
+
+RUN ln -fs /usr/share/zoneinfo/Australia/Brisbane /etc/localtime
+RUN apt-get install -y tzdata
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+
 RUN apt-get install build-essential python3-venv python3-pip -y 
 RUN apt-get install -y libtbbmalloc2 pocl-opencl-icd  
 RUN python3 -m venv /venv
@@ -13,5 +23,22 @@ RUN pip install cmake --upgrade
 RUN pip install conan && conan profile detect
 RUN mkdir /app
 RUN chmod 777 -R /root/.conan2/
-RUN rm -f /root/.conan2/global.conf
+RUN echo "tools.system.package_manager:mode = install" >> /root/.conan2/global.conf
+#RUN rm -f /root/.conan2/global.conf
 
+RUN apt-get install -y libopencv-dev libva-dev
+RUN apt-get install -y libpng-dev 
+RUN apt-get install -y optipng
+
+RUN apt-get install -y ocl-icd-opencl-dev opencl-headers 
+RUN apt-get install -y rocm-dev llvm clang
+
+#RUN apt-get install -y clinfo ocl-icd-opencl-dev 
+
+#RUN timedatectl set-ntp true
+#RUN apt-get install -y ntpdate
+
+#RUN ntpdate -u pool.ntp.org
+
+# apt update && apt install intel-oneapi-dpcpp-cpp
+# apt install -y rocm-dev

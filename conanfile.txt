@@ -1,8 +1,14 @@
 [requires]
 boost/1.87.0
-onedpl/2022.3.0
 opencl-icd-loader/2023.12.14
 opencl-clhpp-headers/2023.12.14
+opencv/4.11.0
+[options]
+ffmpeg/*:with_opus=False
+opencv/*:with_ffmpeg=False
+opencv/*:HIGHGUI_ENABLE_PLUGINS=False
+opencv/*:BUILD_opencv_highgui=False
+opencv/*:with_wayland=False
 [generators]
 CMakeDeps
 CMakeToolchain

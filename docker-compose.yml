@@ -13,6 +13,21 @@ services:
       mv /app/build/Release/generators/AdaptiveSubtractionMain /app/release/AdaptiveSubtractionMain && 
       cd /app/release/ &&
       /app/release/AdaptiveSubtractionMain"
-      
-      
-      
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: all
+    #          capabilities:
+    #            - gpu
+    #stdin_open: true
+    #tty: true
+    #image: cpp-container
+    #environment:
+    #  - ROC_ENABLE=1  # Enable AMD ROCm support
+    #devices:
+    #  - /dev/kfd  # Kernel Fusion Driver for AMD
+    #  - /dev/dri  # Direct Rendering Interface for GPU access
+
+
