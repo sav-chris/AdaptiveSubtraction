@@ -5,6 +5,7 @@ services:
       - .:/app
     command: >
       sh -c "./venv/bin/activate && 
+      touch /app/build/ &&
       conan install /app --build=missing && 
       cd /app/build/Release/generators/ &&
       cmake /app -DCMAKE_TOOLCHAIN_FILE='/app/build/Release/generators/conan_toolchain.cmake' -DCMAKE_BUILD_TYPE='Release' &&

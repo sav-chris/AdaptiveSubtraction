@@ -1,9 +1,5 @@
-#cmake_minimum_required(VERSION 3.29)
 cmake_minimum_required(VERSION 3.6)
-message("3.5")
 project(AdaptiveSubtractionProject)
-
-# opencv/4.11.0
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -22,27 +18,25 @@ find_package(
     REQUIRED
 )
 
-#add_library(adaptiveSubtraction STATIC src/AdaptiveBackgroundSubtraction.cpp src/AdaptiveBackgroundSubtraction.hpp)
-#add_executable(adaptiveSubtraction.Test 
-#    src/AdaptiveBackgroundSubtraction.hpp 
-#    src/AdaptiveBackgroundSubtraction.test.cpp 
-#)
+add_library(adaptiveSubtraction STATIC src/AdaptiveBackgroundSubtraction.cpp src/AdaptiveBackgroundSubtraction.hpp)
+add_executable(adaptiveSubtraction.Test 
+    src/AdaptiveBackgroundSubtraction.hpp 
+    src/AdaptiveBackgroundSubtraction.test.cpp 
+)
 
-#target_link_libraries(adaptiveSubtraction.Test adaptiveSubtraction )
-#target_link_libraries(
-#    adaptiveSubtraction.Test
-#    Boost::filesystem
-#    Boost::system
-#    Boost::unit_test_framework
-#)
-##target_link_libraries(adaptiveSubtraction pstl::ParallelSTL)
-#target_link_libraries(adaptiveSubtraction OpenCL::OpenCL)
-#target_link_libraries(adaptiveSubtraction ${OpenCV_LIBS} )
+target_link_libraries(adaptiveSubtraction.Test adaptiveSubtraction )
+target_link_libraries(
+    adaptiveSubtraction.Test
+    Boost::filesystem
+    Boost::system
+    Boost::unit_test_framework
+)
+#target_link_libraries(adaptiveSubtraction pstl::ParallelSTL)
+target_link_libraries(adaptiveSubtraction OpenCL::OpenCL)
+target_link_libraries(adaptiveSubtraction ${OpenCV_LIBS} )
 
 
 add_executable(AdaptiveSubtractionMain 
     src/main.cpp
 )
-#target_link_libraries(AdaptiveSubtractionMain adaptiveSubtraction)
-target_link_libraries(AdaptiveSubtractionMain OpenCL::OpenCL)
-target_link_libraries(AdaptiveSubtractionMain ${OpenCV_LIBS} )
+target_link_libraries(AdaptiveSubtractionMain adaptiveSubtraction)

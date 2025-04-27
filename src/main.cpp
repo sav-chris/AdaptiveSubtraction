@@ -3,8 +3,19 @@
 
 #include <iostream>
 #include <vector>
+#include "AdaptiveBackgroundSubtraction.hpp"
+
+
+int main() 
+{
+    return 0;
+}
+
+
+/*
+#include <iostream>
+#include <vector>
 #include <CL/opencl.hpp>
-//#include "AdaptiveBackgroundSubtraction.hpp"
 #include <opencv2/core.hpp>
 
 
@@ -80,7 +91,7 @@ int main()
 
     return 0;
 }
-
+*/
 
 /*
 #include <CL/sycl.hpp>

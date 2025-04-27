@@ -1,4 +1,3 @@
-#FROM rocm/dev-ubuntu-22.04 AS base
 FROM rocm/dev-ubuntu-24.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -24,7 +23,6 @@ RUN pip install conan && conan profile detect
 RUN mkdir /app
 RUN chmod 777 -R /root/.conan2/
 RUN echo "tools.system.package_manager:mode = install" >> /root/.conan2/global.conf
-#RUN rm -f /root/.conan2/global.conf
 
 RUN apt-get install -y libopencv-dev libva-dev
 RUN apt-get install -y libpng-dev 
@@ -32,13 +30,5 @@ RUN apt-get install -y optipng
 
 RUN apt-get install -y ocl-icd-opencl-dev opencl-headers 
 RUN apt-get install -y rocm-dev llvm clang
+RUN apt install -y ntp 
 
-#RUN apt-get install -y clinfo ocl-icd-opencl-dev 
-
-#RUN timedatectl set-ntp true
-#RUN apt-get install -y ntpdate
-
-#RUN ntpdate -u pool.ntp.org
-
-# apt update && apt install intel-oneapi-dpcpp-cpp
-# apt install -y rocm-dev
