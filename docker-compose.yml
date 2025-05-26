@@ -3,7 +3,7 @@ services:
     build: .
     volumes:
       - .:/app
-    command: ./app/run.sh
+    command: bash -c "./app/run.sh"
     #deploy:
     #  resources:
     #    reservations:

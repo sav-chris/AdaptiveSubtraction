@@ -9,6 +9,9 @@ find /app/build -type f -exec touch {} +
 # Run conan
 conan install /app --build=missing 
 
+# Update time stamps of libraries
+find /app/libs -type f -exec touch {} +
+
 # Run cmake
 cd /app/build/Release/generators/ 
 cmake /app -DCMAKE_TOOLCHAIN_FILE='/app/build/Release/generators/conan_toolchain.cmake' -DCMAKE_BUILD_TYPE='Release' 

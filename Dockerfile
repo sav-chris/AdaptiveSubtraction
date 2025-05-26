@@ -1,4 +1,4 @@
-FROM rocm/dev-ubuntu-24.04 AS base
+FROM ubuntu:24.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -23,12 +23,14 @@ RUN pip install conan && conan profile detect
 RUN mkdir /app
 RUN chmod 777 -R /root/.conan2/
 RUN echo "tools.system.package_manager:mode = install" >> /root/.conan2/global.conf
+RUN echo "core.cache:storage_path=/app/libs" >> /root/.conan2/global.conf
 
-RUN apt-get install -y libopencv-dev libva-dev
+RUN apt-get install -y libopencv-dev 
 RUN apt-get install -y libpng-dev 
-RUN apt-get install -y optipng
+RUN apt-get install -y optipng 
+RUN apt-get install -y libva-dev
 
 RUN apt-get install -y ocl-icd-opencl-dev opencl-headers 
-RUN apt-get install -y rocm-dev llvm clang
+#RUN apt-get install -y rocm-dev llvm clang
 RUN apt install -y ntp 
 
