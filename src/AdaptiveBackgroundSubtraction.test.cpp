@@ -29,19 +29,7 @@ void runTest
     CV_Assert(image.size() == background.size());
     CV_Assert(image.type() == background.type());
     
-    // Convert to float to avoid wraparound
-    cv::Mat imgF, backF, diffF;
-    image.convertTo(imgF, CV_32F);
-    background.convertTo(backF, CV_32F);
-
-    cv::Mat diff = imgF - backF;
-
-    // Scale or clamp before converting to 8‑bit
-    cv::Mat diff8u;
-    diff.convertTo(diff8u, CV_8U, 1.0, 0.0);
-    cv::imwrite(IMinusB, diff8u);
-
-    //cv::imwrite(IMinusB, image - background);
+    cv::imwrite(IMinusB, image - background);
     
     cv::Mat newBackground = cv::imread(newBackgroundPath, cv::IMREAD_UNCHANGED);
     newBackground.convertTo(newBackground, CV_32FC3);

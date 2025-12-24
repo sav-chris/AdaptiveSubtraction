@@ -30,7 +30,7 @@ std::string AdaptiveBackgroundSubtraction::readFile(std::string filename)
 	return all;
 }
 
-void AdaptiveBackgroundSubtraction::initialiseGPU(bool showPlatforms = false)
+void AdaptiveBackgroundSubtraction::initialiseGPU(bool showPlatforms)
 {
 	cl::Platform::get(&platforms);
 	if (platforms.size() == 0)
