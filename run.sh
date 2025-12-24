@@ -6,8 +6,8 @@
 # Update time stamps of build files
 find /app/build -type f -exec touch {} +
 
-# Run conan
-conan install /app --build=missing 
+# Run conan --output-folder=/app/proj
+conan install /app --build=missing --output-folder=/app/proj 
 
 # Update time stamps of libraries
 find /app/libs -type f -exec touch {} +
