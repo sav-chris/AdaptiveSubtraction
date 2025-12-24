@@ -32,5 +32,34 @@ RUN apt-get install -y libva-dev
 
 RUN apt-get install -y ocl-icd-opencl-dev opencl-headers 
 #RUN apt-get install -y rocm-dev llvm clang
-RUN apt install -y ntp 
+RUN apt install -y ntp ntpdate 
+
+### BGS Library
+
+WORKDIR /opt
+
+# Changing INCUBATOR_VER will break the cache here
+ARG INCUBATOR_VER=unknown
+
+RUN apt install git -y 
+
+RUN git clone https://github.com/andrewssobral/bgslibrary.git
+
+ENV BGSLIBRARY_HOME=$PWD/bgslibrary
+
+# Compile C++ library
+WORKDIR /opt/bgslibrary/build
+RUN cmake .. && make -j4 && make install
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+RUN pip install setuptools wheel
+
+# Turn all shell scripts executable
+WORKDIR /opt/bgslibrary
+RUN chmod +x *.sh
+
+#docker compose run --rm cpp-container bash
+
+WORKDIR /app
 

@@ -34,7 +34,7 @@ target_link_libraries(
 #target_link_libraries(adaptiveSubtraction pstl::ParallelSTL)
 target_link_libraries(adaptiveSubtraction OpenCL::OpenCL)
 target_link_libraries(adaptiveSubtraction ${OpenCV_LIBS} )
-
+target_link_libraries(adaptiveSubtraction bgslibrary_core)
 
 add_executable(AdaptiveSubtractionMain 
     src/main.cpp

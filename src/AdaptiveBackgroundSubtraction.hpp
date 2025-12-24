@@ -49,7 +49,7 @@ private:
 	cl::Buffer AVGGpuBuffer;
 	cl::Buffer signalGpuBuffer;
 
-	void initialiseGPU();
+	void initialiseGPU(bool showPlatforms = false);
 	void allocateCalcDBDI(int length);
 	void allocateCalcPAVG(int length);
 	void allocateAdaptiveBackgroundSubtraction(int length);

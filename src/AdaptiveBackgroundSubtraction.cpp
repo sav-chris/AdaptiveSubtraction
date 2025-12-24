@@ -30,7 +30,7 @@ std::string AdaptiveBackgroundSubtraction::readFile(std::string filename)
 	return all;
 }
 
-void AdaptiveBackgroundSubtraction::initialiseGPU()
+void AdaptiveBackgroundSubtraction::initialiseGPU(bool showPlatforms = false)
 {
 	cl::Platform::get(&platforms);
 	if (platforms.size() == 0)
@@ -41,16 +41,17 @@ void AdaptiveBackgroundSubtraction::initialiseGPU()
 
 	std::cout << "Platforms: " << platforms.size() << std::endl; 
 
-    /*
-	std::cout << "Available platforms: " << std::endl;
-	for (cl::Platform plat : platforms)
+    if (showPlatforms)
 	{
-		std::cout << plat.getInfo<CL_PLATFORM_NAME>() << std::endl;
-	}
-	std::cout << std::endl;
-    */
+		std::cout << "Available platforms: " << std::endl;
+		for (cl::Platform plat : platforms)
+		{
+			std::cout << plat.getInfo<CL_PLATFORM_NAME>() << std::endl;
+		}
+		std::cout << std::endl;
+    }
 
-    platform = platforms[1];
+    platform = platforms[0];
 	
 	platform.getDevices(CL_DEVICE_TYPE_ALL, &devices);
 	if (devices.size() == 0)
@@ -217,7 +218,7 @@ AdaptiveBackgroundSubtraction::AdaptiveBackgroundSubtraction(int length)
 	sources = cl::Program::Sources();
 	kernelCode = readFile("/app/src/kernels.cl");
 
-	this->initialiseGPU();
+	this->initialiseGPU(true);
 
 	this->allocateCalcDBDI(length);
 

@@ -1,16 +1,19 @@
 #!/bin/bash
 
+#Synch clock
+ntpdate time.google.com
+
 # Actiavte virtual environment
-./venv/bin/activate 
+/venv/bin/activate 
 
 # Update time stamps of build files
-find /app/build -type f -exec touch {} +
+# find /app/build -type f -exec touch {} +
 
 # Run conan --output-folder=/app/proj
-conan install /app --build=missing --output-folder=/app/proj 
+conan install /app --build=missing 
 
 # Update time stamps of libraries
-find /app/libs -type f -exec touch {} +
+# find /app/libs -type f -exec touch {} +
 
 # Run cmake
 cd /app/build/Release/generators/ 
